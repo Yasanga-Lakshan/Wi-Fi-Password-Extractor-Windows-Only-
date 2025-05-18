@@ -41,6 +41,12 @@ def save_all_passwords():
                 f.write(f"{profile}: {password}\n")
         messagebox.showinfo("Saved", f"Passwords saved to:\n{file_path}")
 
+def copy_to_clipboard():
+    root.clipboard_clear()
+    root.clipboard_append(output_text.get())
+    messagebox.showinfo("Copied", "Password copied to clipboard!")
+
+
 if os.name != "nt":
     print("❌ This script only runs on Windows.")
     exit()
@@ -62,6 +68,7 @@ dropdown.pack()
 tk.Button(root, text="🔍 Show Password", command=show_selected_password, width=20).pack(pady=5)
 tk.Button(root, text="📋 Show All Passwords", command=show_all_passwords, width=20).pack(pady=5)
 tk.Button(root, text="💾 Save All to File", command=save_all_passwords, width=20).pack(pady=5)
+tk.Button(root, text="📋 Copy to Clipboard", command=copy_to_clipboard, width=20).pack(pady=5)
 
 output_text = tk.StringVar()
 output_label = tk.Label(root, textvariable=output_text, wraplength=480, justify="left", font=("Courier", 10), bg="white", relief="sunken", bd=1)
